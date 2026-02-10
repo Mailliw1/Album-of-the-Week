@@ -1,0 +1,15 @@
+#archive {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #111;
+    color: #fff;
+    transition: right 0.3s ease;
+}
+
+#archive.open {
+    right: 0;
+}
