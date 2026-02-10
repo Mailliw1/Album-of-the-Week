@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Album of the Week</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Album of the Week</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-    <div id="Album">
-        <img id="cover" />
-        <h1 id="album"></h1>
-        <h2 id="artist"></h2>
-        <p id="description"></p>
-        <a id="spotify" target="_blank">Listen</a>
-    </div>
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="header-content">
+                    <h1>Album of the Week</h1>
+                    <p id="subtitle">ERROR</p>
+                </div>
+                <button id="archive-toggle">Archive</button>
+            </div>
+        </header>
 
-    <button id="archive-toggle">Archive</button>
+        <aside id="archive">
+            <ul id="archive-list"></ul>
+        </aside>
 
-    <aside id="archive">
-        <ul id="archive-list"></ul>
-    </aside>
-
-    <script src="scripts.js"></script>
-</body>
+        <script src="scripts.js" async defer></script>
+    </body>
 </html>

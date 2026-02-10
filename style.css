@@ -1,3 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+header {
+    background: linear-gradient(135deg, #222831 0%, #393E46 100%);
+    padding: 2rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #FFD369;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    color: #EEEEEE;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.header-content p {
+    font-size: 0.95rem;
+    color: #FFD369;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+#archive-toggle {
+    background-color: #FFD369;
+    color: #222831;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(255, 211, 105, 0.3);
+    position: relative;
+}
+
+#archive-toggle:hover {
+    background-color: #EEEEEE;
+    box-shadow: 0 4px 12px rgba(255, 211, 105, 0.5);
+    transform: translateY(-2px);
+}
+
+#archive-toggle:active {
+    transform: translateY(0);
+}
+
+body:has(#archive.open) #archive-toggle {
+    transform: translateX(-150px);
+}
+
+body:has(#archive.open) #archive-toggle:hover {
+    transform: translateX(-150px) translateY(-2px);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+html {
+    background-color: #222831;
+}
+
 #archive {
     position: fixed;
     right: -300px;
@@ -5,11 +86,16 @@
     width: 300px;
     height: 100vh;
     overflow-y: auto;
-    background: #111;
+    background: #393E46;
     color: #fff;
     transition: right 0.3s ease;
+    font-family: Playfair Display;
+    font-size: large;
+    padding: 20px;
+    text-align: center;
 }
 
 #archive.open {
     right: 0;
+    box-shadow: -8px 5px 23px 8px #000;
 }

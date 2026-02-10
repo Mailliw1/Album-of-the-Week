@@ -1,29 +1,47 @@
 // Load current album
-fetch('./Data/Album.json')
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('album').textContent = data.album;
-        document.getElementById('artist').textContent = data.artist;
-        document.getElementById('description').textContent = data.description;
-        document.getElementById('cover').src = data.cover;
-        document.getElementById('spotify').href = data.spotify_link;
-    })
-    .catch(err => console.error('Failed to load Album.json:', err));
 
-// Load archive
-fetch('./Data/Archive.json')
-    .then(res => res.json())
-    .then(items => {
-        const list = document.getElementById('archive-list');
-        const entries = Array.isArray(items) ? items : Object.values(items);
-        entries.forEach(item => {
-            const li = document.createElement('li');
-            const year = item.release_date ? new Date(item.release_date).getFullYear() : '';
-            li.textContent = `${item.album} — ${item.artist} (${year})`;
-            list.appendChild(li);
-        });
-    })
-    .catch(err => console.error('Failed to load Archive.json:', err));
+let json;
+let archiveJson;
+
+async function fetchAlbum() {
+    const response = await fetch('./Data/Album.json');
+    json = await response.json();
+}
+
+async function fetchArchive() {
+    const response = await fetch('./Data/Archive.json');
+    archiveJson = await response.json();
+}
+
+addEventListener('DOMContentLoaded', async () => {
+    await fetchAlbum();
+    await fetchArchive();
+
+    console.log(json);
+    console.log(json.album);
+    console.log(archiveJson);
+
+    document.getElementById('subtitle').textContent = `This week's album: ${json.album} by ${json.artist}`;
+
+    const list = document.getElementById('archive-list');
+    let entries = [];
+    if (Array.isArray(archiveJson)) {
+        entries = archiveJson;
+    } else if (archiveJson && Array.isArray(archiveJson.albums)) {
+        entries = archiveJson.albums;
+    } else if (archiveJson && typeof archiveJson === 'object') {
+        // flatten objects like { "2026-02-10": { ... }, ... }
+        entries = Object.values(archiveJson).flatMap(v => Array.isArray(v) ? v : [v]);
+    }
+
+    entries.forEach(({ album, title: itemTitle, artist, date }) => {
+        const li = document.createElement('li');
+        const title = album || itemTitle || 'Unknown album';
+        const finalArtist = artist || 'Unknown artist';
+        li.textContent = date ? `◦ ${title} - ${finalArtist} ◦ (${date})` : `◦ ${title} - ${finalArtist} ◦`;
+        list.appendChild(li);
+    });
+});
 
 // Toggle archive panel
 document.getElementById('archive-toggle').onclick = () => {
