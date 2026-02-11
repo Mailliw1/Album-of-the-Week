@@ -26,7 +26,6 @@ addEventListener('DOMContentLoaded', async () => {
 
     // Setup mini header with quick nav
     const miniHeader = document.getElementById('mini-header');
-    const miniNavLinks = document.getElementById('mini-nav-links');
 
     // Show mini header on scroll
     let ticking = false;
