@@ -21,7 +21,35 @@ addEventListener('DOMContentLoaded', async () => {
     console.log(json.album);
     console.log(archiveJson);
 
-    document.getElementById('subtitle').textContent = `This week's album: ${json.album} by ${json.artist}`;
+    document.getElementById('album-title').textContent = `${json.album} by ${json.artist}`;
+    document.getElementById('cover').src = json.cover;
+    document.getElementById('album-name').textContent = json.album;
+    document.getElementById('artist-name').textContent = json.artist;
+    document.getElementById('album-description').textContent = json.description;
+    document.getElementById('release-date').textContent = `Released: ${json.release_date}`;
+    document.getElementById('genre').textContent = `Genres: ${json.genre}`;
+    
+    const tracklist = document.getElementById('tracklist');
+    json.tracks.forEach((track, index) => {
+        const li = document.createElement('li');
+        const trackNumber = document.createElement('span');
+        trackNumber.classList.add('track-number');
+        trackNumber.textContent = `${track.track_number}. `;
+        
+        const trackTitle = document.createElement('span');
+        trackTitle.classList.add('track-title');
+        trackTitle.textContent = track.title;
+        
+        const trackDuration = document.createElement('span');
+        trackDuration.classList.add('track-duration');
+        trackDuration.textContent = ` (${track.duration})`;
+        
+        li.appendChild(trackNumber);
+        li.appendChild(trackTitle);
+        li.appendChild(trackDuration);
+        tracklist.appendChild(li);
+    });
+    document.getElementById('total-duration').textContent = `Total Duration: ${json.duration}`;
 
     const list = document.getElementById('archive-list');
     let entries = [];
@@ -46,4 +74,8 @@ addEventListener('DOMContentLoaded', async () => {
 // Toggle archive panel
 document.getElementById('archive-toggle').onclick = () => {
     document.getElementById('archive').classList.toggle('open');
+};
+
+document.getElementById('nav-bar-toggle').onclick = () => {
+    document.getElementById('nav-bar').classList.toggle('open');
 };

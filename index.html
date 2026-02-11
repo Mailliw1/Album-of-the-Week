@@ -16,18 +16,92 @@
     <body>
         <header>
             <div class="header-container">
+                <button id="nav-bar-toggle"><i class="fa-solid fa-circle-chevron-right"></i></button>
                 <div class="header-content">
-                    <h1>Album of the Week</h1>
-                    <p id="subtitle">ERROR</p>
+                    <div class="header-part">
+                        <h2>Album of the Week</h2>
+                        <h3>This Weeks Album is: </h3>
+                    </div>
+                    <div class="header-part">
+                        <h1 id="album-title"></h1>
+                    </div>
                 </div>
                 <button id="archive-toggle">Archive</button>
             </div>
         </header>
+
+        <aside id="nav-bar">
+            <ul id="nav-list"></ul>
+        </aside>
+
+        <div class="main-content">
+            <div class="main-content-slice">
+                <div class="main-content-left">
+                    <div class="album-info">
+                        <img id="cover" src="https://upload.wikimedia.org/wikipedia/en/1/13/The_Mantle.jpg" alt="Album Cover">
+                        <div class="album-details">
+                            <h1 id="album-name">ERROR</h1>
+                            <h2 id="artist-name">ERROR</h2>
+                            <p id="album-description">ERROR DESCRIPTION</p>
+                        </div>
+                    </div>
+                    <div class="extra-info">
+                        <h2 id="release-date">ddmmyyyy</h2>
+                        <h2 id="genre">ERROR</h2>
+                    </div>
+                </div>
+                <div class="main-content-right">
+                    <h2 id="tracklist-title">Tracklist</h2>
+                    <ol id="tracklist"></ol>
+                    <p id="total-duration"></p>
+                </div>
+            </div>
+
+            <div class="main-content-slice">
+                <div class="main-content-left">
+
+                </div>
+
+                <div class="main-content-right">
+
+                </div>
+            </div>
+        </div>
 
         <aside id="archive">
             <ul id="archive-list"></ul>
         </aside>
 
         <script src="scripts.js" async defer></script>
+        <script src="https://kit.fontawesome.com/839a1bc508.js" crossorigin="anonymous"></script>
+
+        <footer>
+            <div class="inner_footer">
+                <div class="logo_container">
+                    <img src="rose-512.ico" alt="Logo">
+                </div>
+
+                <div class="footer_third">
+                    <h1>Links</h1>
+                    <p><a href="#">Wikipedia Link</a></p>
+                    <p><a href="#"></a></p>
+                </div>
+
+                <div class="footer_third">
+                    <h1>Extra</h1>
+                    <p><a href="#">Better JustWatch</a></p>
+                    <p><a href="#">My Portfolio</a></p>
+                </div>
+
+                <div class="footer_third">
+                    <h1>My Socials</h1>
+                    <li><a href="#"><i class="fa-brands fa-discord"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-bluesky"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </div>
+            </div>
+        </footer>
+
     </body>
 </html>
