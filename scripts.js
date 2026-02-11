@@ -2,27 +2,20 @@
 let json;
 let archiveJson;
 
-async function fetchAlbum() {
-    const response = await fetch('./Data/Album.json');
-    json = await response.json();
-}
-
-async function fetchArchive() {
-    const response = await fetch('./Data/Archive.json');
-    archiveJson = await response.json();
-}
-
 async function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 addEventListener('DOMContentLoaded', async () => {
-    await fetchAlbum();
-    await fetchArchive();
+    try {
+        const [albumRes, archiveRes] = await Promise.all([
+            fetch('./Data/Album.json'),
+            fetch('./Data/Archive.json')
+        ]);
+        json = await albumRes.json();
+        archiveJson = await archiveRes.json();
 
-    console.log(json);
-    console.log(json.album);
-    console.log(archiveJson);
+
 
     // Setup mini header with quick nav
     const miniHeader = document.getElementById('mini-header');
@@ -95,9 +88,9 @@ addEventListener('DOMContentLoaded', async () => {
         originLink.textContent = `Review Courtesy of ${json['review-origin'][0]}`;
         document.getElementById('origin').appendChild(originLink);
 
-        const extraReviewsLabel = document.getElementsByClassName('button-label');
         json.other_reviews.forEach((review, index) => {
-            extraReviewsLabel[index].textContent = `${review.title}`;
+            const label = document.getElementById(`button-label${index + 1}`);
+            if (label) label.textContent = review.title;
         });
 
         const list = document.getElementById('archive-list');
@@ -119,18 +112,17 @@ addEventListener('DOMContentLoaded', async () => {
             list.appendChild(li);
         });
     } else {
-        console.log('Failed to load album or archive data.');
+        console.error('Failed to load album or archive data.');
+    }
+    } catch (error) {
+        console.error('Error loading data:', error);
     }
 });
 
 // Toggle archive panel
-document.getElementById('archive-toggle').onclick = () => {
-    document.getElementById('archive').classList.toggle('open');
-};
-
-document.getElementById('other-archive-toggle').onclick = () => {
-    document.getElementById('archive').classList.toggle('open');
-};
+const toggleArchive = () => document.getElementById('archive').classList.toggle('open');
+document.getElementById('archive-toggle').addEventListener('click', toggleArchive);
+document.getElementById('other-archive-toggle').addEventListener('click', toggleArchive);
 
 document.getElementById('nav-bar-toggle').onclick = () => {
     if (document.getElementById('archive').classList.contains('open')) {
@@ -141,8 +133,8 @@ document.getElementById('nav-bar-toggle').onclick = () => {
 };
 
 document.querySelectorAll('.extra-reviews-buttons').forEach(button => {
-    button.onclick = () => {
-        const reviewId = button.innerText;
+    button.addEventListener('click', () => {
+        const reviewId = button.querySelector('.button-label').textContent;
         console.log(reviewId);
         let extraReviewBox = document.getElementById('extra-review-content');
         const reviewContent = json.other_reviews.find(review => review.title === reviewId);
@@ -150,11 +142,11 @@ document.querySelectorAll('.extra-reviews-buttons').forEach(button => {
             extraReviewBox.textContent = reviewContent.review.replace(/\\n/g, '\n');
             document.getElementById('extra-review-origin').textContent = `Review Courtesy of ${reviewContent.source} by ${reviewContent.author}.     Rating: ${reviewContent.rating}/100`;
         }
-    };
+    });
 });
 
 document.querySelectorAll('.scroll-button').forEach(button => {
-    button.onclick = () => {
+    button.addEventListener('click', () => {
         if (document.getElementById('nav-bar').classList.contains('open')) {
             document.getElementById('nav-bar').classList.remove('open');
         }
@@ -171,12 +163,8 @@ document.querySelectorAll('.scroll-button').forEach(button => {
         default:
             break;
         }
-    };
+    });
 });
-
-window.onscroll = function() {
-    scrollFunction();
-};
 
 function scrollFunction() {
     const button = document.getElementById("back-to-top");
@@ -194,3 +182,5 @@ function scrollFunction() {
         }
     }
 }
+
+window.addEventListener('scroll', scrollFunction);

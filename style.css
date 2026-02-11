@@ -384,6 +384,12 @@ html {
     justify-items: center;
 }
 
+.button1 { grid-area: button1; }
+.button2 { grid-area: button2; }
+.button3 { grid-area: button3; }
+.button4 { grid-area: button4; }
+.button5 { grid-area: button5; }
+
 .button-label {
     text-align: center;
 }
@@ -483,10 +489,6 @@ html {
     background-color: #B2071D;
     box-shadow: 0 2px 6px rgba(204, 15, 15, 0.5);
     transform: translateY(-2px);
-}
-
-.extra-reviews-toggle:active {
-    transform: translateY(0);
 }
 
 #mini-header {
