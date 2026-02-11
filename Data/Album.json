@@ -57,9 +57,18 @@
     "main_review": "Agalloch's 'The Mantle' isn't just a great and influential album; it's a transformative journey, one that showed the band breaking away from their early direction in favor of its intricate blend of atmospheric metal mixed with an unheard amount of folk, and post-rock canvas. \n\nOriginally released in 2002, and met with surprise and mixed emotions, it continues to captivate listeners with its atmospheric depth and emotional resonance decades later. One could say, there is no other album like this, none other whose artwork and imagery are so intertwined, every image resonates so well with the music, it feels almost impeccable, as if pictures could tell the songs by themselves. \n\nThe album allows the nostalgic warmth many crave, yet simultaneously creates a quite post-modern setting with the cold and haunting silver imagery: nature's majestic realm meets post-modern bitterness. \n\nFrom the haunting melodies of \"In the Shadow of Our Pale Companion\" to the almost hypnotic rhythms of \"I Am the Wooden Doors,\" the album's sonic palette is as diverse as the landscapes it evokes. Each track on \"The Mantle\" unfolds like a chapter in a dark, enchanting journey. Agalloch's signature blend of atmospheric (black) metal, deep folk instrumentation, and poetic lyricism creates a sense of introspection, an ethereal post-urban panorama. \n\nUltimately, 'The Mantle' isn't just an album to be listened to; it's another experience to be felt. For fans of atmospheric & profound music, this album remains utterly essential... and utterly relevant.",
     "review-origin": ["bandcamp", "https://agalloch.bandcamp.com/album/the-mantle-deluxe-edition"],
     "band_members": [
-        "John Haughm - vocals, acoustic and electric guitars, drums, percussion, EBow, woodchimes, samples",
-        "Don Anderson - acoustic, classical and electric guitars, piano",
-        "Jason William Walton - bass guitar, noisescape"
+        {
+            "name": "John Haughm",
+            "roles": ["vocals", " acoustic and electric guitars", " drums", " percussion", " EBow", " woodchimes", " samples"]
+        },
+        {
+            "name": "Don Anderson",
+            "roles": ["acoustic, classical and electric guitars", " piano"]
+        },
+        {
+            "name": "Jason William Walton",
+            "roles": ["bass guitar", " noisescape"]
+        }
     ],
     "other_reviews": [
         {

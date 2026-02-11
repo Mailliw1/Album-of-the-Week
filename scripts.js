@@ -12,6 +12,10 @@ async function fetchArchive() {
     archiveJson = await response.json();
 }
 
+async function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 addEventListener('DOMContentLoaded', async () => {
     await fetchAlbum();
     await fetchArchive();
@@ -20,61 +24,9 @@ addEventListener('DOMContentLoaded', async () => {
     console.log(json.album);
     console.log(archiveJson);
 
-    // Populate auto navigation menu
-    const navList = document.getElementById('nav-list');
-    const navSections = [
-        { name: 'Album Info', id: 'album-section' },
-        { name: 'Tracklist', id: 'tracklist-section' },
-        { name: 'Reviews', id: 'reviews-section' },
-        { name: 'Listen', id: 'streaming-section' }
-    ];
-
-    navSections.forEach(section => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = `#${section.id}`;
-        a.textContent = section.name;
-        a.style.cursor = 'pointer';
-        a.onclick = (e) => {
-            e.preventDefault();
-            const element = document.getElementById(section.id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-                document.getElementById('nav-bar').classList.remove('open');
-            }
-        };
-        li.appendChild(a);
-        navList.appendChild(li);
-    });
-
-    // Add section IDs to main content areas
-    const mainContentSlices = document.querySelectorAll('.main-content-slice');
-    if (mainContentSlices.length >= 3) {
-        mainContentSlices[0].id = 'album-section';
-        mainContentSlices[1].id = 'reviews-section';
-        mainContentSlices[2].id = 'streaming-section';
-    }
-
-    // Add smooth scroll behavior styling
-    document.documentElement.style.scrollBehavior = 'smooth';
-
     // Setup mini header with quick nav
     const miniHeader = document.getElementById('mini-header');
     const miniNavLinks = document.getElementById('mini-nav-links');
-    
-    navSections.forEach(section => {
-        const a = document.createElement('a');
-        a.href = `#${section.id}`;
-        a.textContent = section.name;
-        a.onclick = (e) => {
-            e.preventDefault();
-            const element = document.getElementById(section.id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-        miniNavLinks.appendChild(a);
-    });
 
     // Show mini header on scroll
     let ticking = false;
@@ -131,6 +83,13 @@ addEventListener('DOMContentLoaded', async () => {
         });
         document.getElementById('total-duration').textContent = `Total Duration: ${json.duration}`;
 
+        const bandList = document.getElementById('band');
+        json.band_members.forEach(member => {
+            const li = document.createElement('li');
+            li.textContent = `${member.name} - ${member.roles}`;
+            bandList.appendChild(li);
+        });
+
         document.getElementById('main-review').textContent = json.main_review.replace(/\\n/g, '\n');
         const originLink = document.createElement('a');
         originLink.href = json['review-origin'][1];
@@ -183,6 +142,27 @@ document.querySelectorAll('.extra-reviews-buttons').forEach(button => {
         if (reviewContent) {
             extraReviewBox.textContent = reviewContent.review.replace(/\\n/g, '\n');
             document.getElementById('extra-review-origin').textContent = `Review Courtesy of ${reviewContent.source} by ${reviewContent.author}.     Rating: ${reviewContent.rating}/100`;
+        }
+    };
+});
+
+document.querySelectorAll('.scroll-button').forEach(button => {
+    button.onclick = () => {
+        if (document.getElementById('nav-bar').classList.contains('open')) {
+            document.getElementById('nav-bar').classList.remove('open');
+        }
+        switch (button.innerText) {
+        case "Album Info":
+            document.getElementById('album-info').scrollIntoView({ behavior: 'smooth' });
+            break;
+        case "Album Reviews":
+            document.getElementById('album-review').scrollIntoView({ behavior: 'smooth' });
+            break;
+        case "Album Streaming":
+            document.getElementById('album-streaming').scrollIntoView({ behavior: 'smooth' });
+            break;
+        default:
+            break;
         }
     };
 });
