@@ -20,8 +20,82 @@ addEventListener('DOMContentLoaded', async () => {
     console.log(json.album);
     console.log(archiveJson);
 
+    // Populate auto navigation menu
+    const navList = document.getElementById('nav-list');
+    const navSections = [
+        { name: 'Album Info', id: 'album-section' },
+        { name: 'Tracklist', id: 'tracklist-section' },
+        { name: 'Reviews', id: 'reviews-section' },
+        { name: 'Listen', id: 'streaming-section' }
+    ];
+
+    navSections.forEach(section => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${section.id}`;
+        a.textContent = section.name;
+        a.style.cursor = 'pointer';
+        a.onclick = (e) => {
+            e.preventDefault();
+            const element = document.getElementById(section.id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('nav-bar').classList.remove('open');
+            }
+        };
+        li.appendChild(a);
+        navList.appendChild(li);
+    });
+
+    // Add section IDs to main content areas
+    const mainContentSlices = document.querySelectorAll('.main-content-slice');
+    if (mainContentSlices.length >= 3) {
+        mainContentSlices[0].id = 'album-section';
+        mainContentSlices[1].id = 'reviews-section';
+        mainContentSlices[2].id = 'streaming-section';
+    }
+
+    // Add smooth scroll behavior styling
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Setup mini header with quick nav
+    const miniHeader = document.getElementById('mini-header');
+    const miniNavLinks = document.getElementById('mini-nav-links');
+    
+    navSections.forEach(section => {
+        const a = document.createElement('a');
+        a.href = `#${section.id}`;
+        a.textContent = section.name;
+        a.onclick = (e) => {
+            e.preventDefault();
+            const element = document.getElementById(section.id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+        miniNavLinks.appendChild(a);
+    });
+
+    // Show mini header on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrollPos = window.scrollY;
+                if (scrollPos > 200) {
+                    miniHeader.classList.add('visible');
+                } else {
+                    miniHeader.classList.remove('visible');
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
     if (json && archiveJson) {
         document.getElementById('album-title').textContent = `${json.album} by ${json.artist}`;
+        document.getElementById('mini-album-title').textContent = `${json.album} by ${json.artist}`;
         document.getElementById('cover').src = json.cover;
         document.getElementById('album-name').textContent = json.album;
         document.getElementById('artist-name').textContent = json.artist;

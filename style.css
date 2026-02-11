@@ -136,6 +136,17 @@ body:has(#nav-bar.open) #nav-bar-toggle:hover {
     transform: translateX(150px) translateY(2px) rotate(180deg);
 }
 
+#nav-list {
+    margin: 20px 0;
+    font-size: 1.2rem;
+    color: #EEEEEE;
+    transition: color 0.3s ease;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 #archive-toggle {
     background-color: #FFD369;
     color: #222831;
@@ -431,6 +442,52 @@ html {
 
 .extra-reviews-toggle:active {
     transform: translateY(0);
+}
+
+#mini-header {
+    position: sticky;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background: #222831;
+    border-bottom: 2px solid #FFD369;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    gap: 1rem;
+}
+
+#mini-header.visible {
+    display: flex;
+}
+
+#mini-album-title {
+    font-size: 0.9rem;
+    color: #FFD369;
+    font-weight: 600;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#mini-nav-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+}
+
+#mini-nav-links a {
+    font-size: 0.85rem;
+    color: #EEEEEE;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+#mini-nav-links a:hover {
+    color: #FFD369;
+    text-decoration: none;
 }
 
 footer {
