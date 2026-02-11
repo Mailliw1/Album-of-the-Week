@@ -207,6 +207,10 @@ html {
     display: flex;
 }
 
+.main-content-slice:first-child {
+    margin-bottom: 50px;
+}
+
 .main-content-left {
     width: 50vw;
 }
@@ -305,6 +309,60 @@ html {
 #total-duration {
     position: absolute;
     right: 4%;
+}
+
+.extra-reviews {
+    display: grid;
+    width: 48vw;
+    height: 80vh;
+    grid-template-columns: 16vw 16vw 16vw;
+    grid-template-areas: 
+    "button1 . button2"
+    ". button3 ."
+    "button4 . button5";
+    margin: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+.extra-reviews-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.extra-reviews-toggle {
+    background-color: #FFD369;
+    color: #222831;
+    border: none;
+    aspect-ratio: 1/1;
+    width: 75px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(255, 211, 105, 0.3);
+    position: relative;
+}
+
+.extra-reviews-toggle:hover {
+    background-color: #EEEEEE;
+    box-shadow: 0 2px 6px rgba(255, 211, 105, 0.5);
+    transform: translateY(-2px);
+}
+
+.extra-reviews-toggle:active {
+    transform: translateY(0);
+}
+
+#main-review {
+    white-space: pre-wrap;
+    border: 2px solid #FFD369;
+    border-radius: 8px;
+    padding: 5px;
+    width: 48vw;
 }
 
 footer {

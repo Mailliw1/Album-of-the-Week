@@ -25,6 +25,7 @@ addEventListener('DOMContentLoaded', async () => {
     document.getElementById('cover').src = json.cover;
     document.getElementById('album-name').textContent = json.album;
     document.getElementById('artist-name').textContent = json.artist;
+    document.getElementById('music-label').textContent = json.label;
     document.getElementById('album-description').textContent = json.description;
     document.getElementById('release-date').textContent = `Released: ${json.release_date}`;
     document.getElementById('genre').textContent = `Genres: ${json.genre}`;
@@ -50,6 +51,14 @@ addEventListener('DOMContentLoaded', async () => {
         tracklist.appendChild(li);
     });
     document.getElementById('total-duration').textContent = `Total Duration: ${json.duration}`;
+
+    document.getElementById('main-review').textContent = json.main_review.replace(/\\n/g, '\n');
+    const originLink = document.createElement('a');
+    originLink.href = json['review-origin'][1];
+    originLink.textContent = `Review Courtesy of ${json['review-origin'][0]}`;
+    document.getElementById('origin').appendChild(originLink);
+
+    
 
     const list = document.getElementById('archive-list');
     let entries = [];
