@@ -61,6 +61,7 @@ header {
     margin-bottom: 0.5rem;
     font-weight: 700;
     letter-spacing: 1px;
+    max-width: 600px;
 }
 
 .header-content h2 {
@@ -86,9 +87,7 @@ header {
 }
 
 .header-part:last-child {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
+    position: relative;
 }
 
 #nav-bar-toggle {
