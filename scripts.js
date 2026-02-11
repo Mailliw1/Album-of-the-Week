@@ -129,8 +129,16 @@ document.getElementById('archive-toggle').onclick = () => {
     document.getElementById('archive').classList.toggle('open');
 };
 
+document.getElementById('other-archive-toggle').onclick = () => {
+    document.getElementById('archive').classList.toggle('open');
+};
+
 document.getElementById('nav-bar-toggle').onclick = () => {
-    document.getElementById('nav-bar').classList.toggle('open');
+    if (document.getElementById('archive').classList.contains('open')) {
+        document.getElementById('archive').classList.remove('open');
+    } else {
+        document.getElementById('nav-bar').classList.toggle('open');
+    }
 };
 
 document.querySelectorAll('.extra-reviews-buttons').forEach(button => {
@@ -159,10 +167,31 @@ document.querySelectorAll('.scroll-button').forEach(button => {
             document.getElementById('album-review').scrollIntoView({ behavior: 'smooth' });
             break;
         case "Album Streaming":
-            document.getElementById('album-streaming').scrollIntoView({ behavior: 'smooth' });
+            document.getElementsByClassName('streaming')[0].scrollIntoView({ behavior: 'smooth' });
             break;
         default:
             break;
         }
     };
 });
+
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    const button = document.getElementById("back-to-top");
+    // Check if the user is near the bottom of the document
+    if (screen.width <= 850) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+            button.classList.add("move-up");
+        } else {
+            button.classList.remove("move-up");
+        }
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    }
+}
