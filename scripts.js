@@ -52,6 +52,7 @@ addEventListener('DOMContentLoaded', async () => {
         document.getElementById('youtube-music').href = json.youtube_link;
         document.getElementById('extra-review-content').textContent = json.other_reviews[0].review.replace(/\\n/g, '\n');
         document.getElementById('extra-review-origin').textContent = `Review Courtesy of ${json.other_reviews[0].source} by ${json.other_reviews[0].author}.     Rating: ${json.other_reviews[0].rating}/100`;
+        document.getElementById('wiki-link').href = json.wiki_link;
         
         const tracklist = document.getElementById('tracklist');
         json.tracks.forEach((track, index) => {
